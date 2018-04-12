@@ -1,0 +1,59 @@
+{
+  "name": "generator-mybatis-dtos",
+  "version": "0.0.2",
+  "description": "Springboot mybatis base project",
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "",
+    "yeoman-generator"
+  ],
+  "devDependencies": {
+    "coveralls": "^3.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-xo": "^0.20.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.14.3",
+    "nsp": "^3.2.1",
+    "prettier": "^1.11.0",
+    "yeoman-assert": "^3.1.1"
+  },
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "shelljs": "^0.8.1",
+    "yeoman-generator": "^2.0.3",
+    "yosay": "^2.0.2"
+  },
+  "scripts": {
+    "prepublish": "nsp check",
+    "pretest": "eslint .",
+    "precommit": "lint-staged",
+    "test": "jest"
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "prettier"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "printWidth": 90
+        }
+      ]
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "license": "Apache-2.0"
+}
