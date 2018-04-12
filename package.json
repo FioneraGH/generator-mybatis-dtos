@@ -28,10 +28,7 @@
     "yosay": "^2.0.2"
   },
   "scripts": {
-    "prepublish": "nsp check",
-    "pretest": "eslint .",
-    "precommit": "lint-staged",
-    "test": "jest"
+    "pretest": "eslint ."
   },
   "eslintConfig": {
     "extends": [

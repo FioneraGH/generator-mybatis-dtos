@@ -18,7 +18,7 @@
         <plugin type="com.centling.plugins.SelectSelectivePlugin"></plugin>
         <plugin type="com.centling.plugins.BatchUpdatePlugin"></plugin>
         <plugin type="com.centling.plugins.DeleteMorePlugin"></plugin>
-        <plugin type="com.centling.plugins.DeleteMoreLogicPlugin"></plugin>-->
+        <plugin type="com.centling.plugins.DeleteMoreLogicPlugin"></plugin> -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
           <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
         </plugin>
@@ -37,7 +37,6 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-
         <!--生成Model类存放位置-->
         <javaModelGenerator targetPackage="<%= packageName %>.domain.<%= subPackageName %>" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
@@ -53,7 +52,5 @@
         </javaClientGenerator>
         <!--生成对应表及类名-->
         <table tableName="<%= entityTableName %>" domainObjectName="<%= domainName %>" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-
-
     </context>
 </generatorConfiguration>

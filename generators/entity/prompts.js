@@ -16,19 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const chalk = require('chalk');
-const path = require('path');
-const _ = require('lodash');
-const shelljs = require('shelljs');
-
-/*module.exports = {
-  askForDBConnURL,
-  askForDBUserId,
-  askForDBPassword,
-  askForTableName,
-  askForDomainName,
-  askForPackageName
-};*/
+var config  = require('./config')
 
 module.exports = {
   askForDBHost,
@@ -37,23 +25,131 @@ module.exports = {
   askForDBUserName,
   askForDBPassword,
   askForTableName,
+
   askForDomainName,
   askForPackageName,
   askForSubPackageName
 };
 
+function askForDBHost() {
+  // Don't prompt if there are no relationships
+  const DBHost = this.DBHost || config.DBHost;
+
+  const done = this.async();
+  const prompts = [
+    {
+      type: 'input',
+      name: 'DBHost',
+      message: 'Please input the db host:',
+      default: DBHost
+    }
+  ];
+  this.prompt(prompts).then(props => {
+    /* Overwrite the table name for the entity using name obtained from the user */
+    if (props.DBHost !== this.DBHost) {
+      this.DBHost = props.DBHost;
+    }
+    done();
+  });
+}
+function askForDBPort() {
+  // Don't prompt if there are no relationships
+  const DBPort = this.DBPort || config.DBPort;
+
+  const done = this.async();
+  const prompts = [
+    {
+      type: 'input',
+      name: 'DBPort',
+      message: 'Please input the db port:',
+      default: DBPort
+    }
+  ];
+  this.prompt(prompts).then(props => {
+    /* Overwrite the table name for the entity using name obtained from the user */
+    if (props.DBPort !== this.DBPort) {
+      this.DBPort = props.DBPort;
+    }
+    done();
+  });
+}
+
+function askForDBName() {
+  // Don't prompt if there are no relationships
+  const DBName = this.DBName || config.DBName;
+
+  const done = this.async();
+  const prompts = [
+    {
+      type: 'input',
+      name: 'DBName',
+      message: 'Please input the db name:',
+      default: DBName
+    }
+  ];
+  this.prompt(prompts).then(props => {
+    /* Overwrite the table name for the entity using name obtained from the user */
+    if (props.DBName !== this.DBName) {
+      this.DBName = props.DBName;
+    }
+    done();
+  });
+}
+
+function askForDBUserName() {
+  // Don't prompt if there are no relationships
+  const DBUserName = this.DBUserName || config.DBUserName;
+
+  const done = this.async();
+  const prompts = [
+    {
+      type: 'input',
+      name: 'DBUserName',
+      message: 'Please input the db username:',
+      default: DBUserName
+    }
+  ];
+  this.prompt(prompts).then(props => {
+    /* Overwrite the table name for the entity using name obtained from the user */
+    if (props.DBUserName !== this.DBUserName) {
+      this.DBUserName = props.DBUserName;
+    }
+    done();
+  });
+}
+
+function askForDBPassword() {
+  // Don't prompt if there are no relationships
+  const DBPassword = this.DBPassword || config.DBPassword;
+
+  const done = this.async();
+  const prompts = [
+    {
+      type: 'input',
+      name: 'DBPassword',
+      message: 'Please input the db password:',
+      default: DBPassword
+    }
+  ];
+  this.prompt(prompts).then(props => {
+    /* Overwrite the table name for the entity using name obtained from the user */
+    if (props.DBPassword !== this.DBPassword) {
+      this.DBPassword = props.DBPassword;
+    }
+    done();
+  });
+}
+
 function askForTableName() {
   // Don't prompt if there are no relationships
-  const entityTableName = this.entityTableName;
-  const prodDatabaseType = this.prodDatabaseType;
+  const entityTableName = this.entityTableName || config.entityTableName;
 
   const done = this.async();
   const prompts = [
     {
       type: 'input',
       name: 'entityTableName',
-      message:
-        'Please input table name:',
+      message: 'Please input table name:',
       default: entityTableName
     }
   ];
@@ -67,125 +163,6 @@ function askForTableName() {
 }
 
 
-function askForDBHost() {
-  // Don't prompt if there are no relationships
-  const DBHost = this.DBHost;
-
-  const done = this.async();
-  const prompts = [
-    {
-      type: 'input',
-      name: 'DBHost',
-      message:
-        'Please input the db host:',
-      default: DBHost
-    }
-  ];
-  this.prompt(prompts).then(props => {
-    /* Overwrite the table name for the entity using name obtained from the user */
-    if (props.DBHost !== this.DBHost) {
-    this.DBHost = props.DBHost;
-  }
-  done();
-});
-}
-
-
-
-function askForDBPort() {
-  // Don't prompt if there are no relationships
-  const DBPort = this.DBPort;
-
-  const done = this.async();
-  const prompts = [
-    {
-      type: 'input',
-      name: 'DBPort',
-      message:
-        'Please input the db port:',
-      default: DBPort
-    }
-  ];
-  this.prompt(prompts).then(props => {
-    /* Overwrite the table name for the entity using name obtained from the user */
-    if (props.DBPort !== this.DBPort) {
-    this.DBPort = props.DBPort;
-  }
-  done();
-});
-}
-
-function askForDBName() {
-  // Don't prompt if there are no relationships
-  const DBName = this.DBName;
-
-  const done = this.async();
-  const prompts = [
-    {
-      type: 'input',
-      name: 'DBName',
-      message:
-        'Please input the db name:',
-      default: DBName
-    }
-  ];
-  this.prompt(prompts).then(props => {
-    /* Overwrite the table name for the entity using name obtained from the user */
-    if (props.DBName !== this.DBName) {
-    this.DBName = props.DBName;
-  }
-  done();
-});
-}
-
-function askForDBUserName() {
-  // Don't prompt if there are no relationships
-  const DBUserName = this.DBUserName;
-
-  const done = this.async();
-  const prompts = [
-    {
-      type: 'input',
-      name: 'DBUserName',
-      message:
-        'Please input the db username:',
-      default: DBUserName
-    }
-  ];
-  this.prompt(prompts).then(props => {
-    /* Overwrite the table name for the entity using name obtained from the user */
-    if (props.DBUserName !== this.DBUserName) {
-    this.DBUserName = props.DBUserName;
-  }
-  done();
-});
-}
-
-
-
-function askForDBPassword() {
-  // Don't prompt if there are no relationships
-  const DBPassword = this.DBPassword;
-
-  const done = this.async();
-  const prompts = [
-    {
-      type: 'input',
-      name: 'DBPassword',
-      message:
-        'Please input the db password:',
-      default: DBPassword
-    }
-  ];
-  this.prompt(prompts).then(props => {
-    /* Overwrite the table name for the entity using name obtained from the user */
-    if (props.DBPassword !== this.DBPassword) {
-    this.DBPassword = props.DBPassword;
-  }
-  done();
-});
-}
-
 function askForDomainName() {
   // Don't prompt if there are no relationships
   const domainName = this.domainName;
@@ -195,63 +172,59 @@ function askForDomainName() {
     {
       type: 'input',
       name: 'domainName',
-      message:
-        'Please input the domain name:',
+      message: 'Please input the domain name:',
       default: domainName
     }
   ];
   this.prompt(prompts).then(props => {
     /* Overwrite the table name for the entity using name obtained from the user */
     if (props.domainName !== this.domainName) {
-    this.domainName = props.domainName;
-  }
-  done();
-});
+      this.domainName = props.domainName;
+    }
+    done();
+  });
 }
 
 function askForPackageName() {
   // Don't prompt if there are no relationships
-  const packageName = this.packageName;
+  const packageName = this.packageName || config.packageName;
 
   const done = this.async();
   const prompts = [
     {
       type: 'input',
       name: 'packageName',
-      message:
-        'Please input the package name:',
+      message: 'Please input the package name:',
       default: packageName
     }
   ];
   this.prompt(prompts).then(props => {
     /* Overwrite the table name for the entity using name obtained from the user */
     if (props.packageName !== this.packageName) {
-    this.packageName = props.packageName;
-  }
-  done();
-});
+      this.packageName = props.packageName;
+    }
+    done();
+  });
 }
-
 
 function askForSubPackageName() {
   // Don't prompt if there are no relationships
-  const subPackageName = this.subPackageName;
+  const subPackageName = this.subPackageName || config.subPackageName;
 
   const done = this.async();
   const prompts = [
     {
       type: 'input',
       name: 'subPackageName',
-      message:
-        'Please input the sub-package name:',
+      message: 'Please input the sub-package name:',
       default: subPackageName
     }
   ];
   this.prompt(prompts).then(props => {
     /* Overwrite the table name for the entity using name obtained from the user */
     if (props.subPackageName !== this.subPackageName) {
-    this.subPackageName = props.subPackageName;
-  }
-  done();
-});
+      this.subPackageName = props.subPackageName;
+    }
+    done();
+  });
 }
