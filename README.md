@@ -26,7 +26,7 @@ yo generator:entity
 
 ## License
 
-Apache-2.0 © [FioneraGH](./LICENSE.md)
+Apache-2.0 © [FioneraGH](./LICENSE)
 
 [npm-image]: https://badge.fury.io/js/generator-centlingbase.svg
 [npm-url]: https://npmjs.org/package/generator-centlingbase
