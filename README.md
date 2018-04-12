@@ -14,7 +14,7 @@ npm link
 Then generate your new project:
 
 ```bash
-yo generator:entity
+yo mybatis-dtos:entity
 ```
 
 ## Getting To Know Yeoman
