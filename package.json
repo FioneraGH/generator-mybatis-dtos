@@ -5,7 +5,7 @@
   "files": [
     "generators"
   ],
-  "main": "generators/index.js",
+  "main": "generators/entity/index.js",
   "keywords": [
     "",
     "yeoman-generator"
@@ -26,6 +26,9 @@
     "shelljs": "^0.8.1",
     "yeoman-generator": "^2.0.3",
     "yosay": "^2.0.2"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "scripts": {
     "pretest": "eslint ."

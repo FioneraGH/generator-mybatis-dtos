@@ -19,16 +19,16 @@
 var config  = require('./config')
 
 module.exports = {
-  askForDBHost,
-  askForDBPort,
-  askForDBName,
-  askForDBUserName,
-  askForDBPassword,
-  askForTableName,
+  askForDBHost: askForDBHost,
+  askForDBPort: askForDBPort,
+  askForDBName: askForDBName,
+  askForDBUserName: askForDBUserName,
+  askForDBPassword: askForDBPassword,
+  askForTableName: askForTableName,
 
-  askForDomainName,
-  askForPackageName,
-  askForSubPackageName
+  askForDomainName: askForDomainName,
+  askForPackageName: askForPackageName,
+  askForSubPackageName: askForSubPackageName
 };
 
 function askForDBHost() {

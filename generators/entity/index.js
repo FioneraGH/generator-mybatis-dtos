@@ -1,5 +1,6 @@
 'use strict';
 const Generator = require('yeoman-generator');
+// import { Generator } from 'yeoman-generator';
 const shell  = require('shelljs');
 const prompts = require('./prompts');
 
