@@ -36,7 +36,7 @@ public class <%= domainName %>Service {
      * 写入记录
      *
      *
-     * @param record { @link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>Dto }
      *
      * @return int
      */
@@ -60,7 +60,7 @@ public class <%= domainName %>Service {
      * 批量写入记录
      *
      *
-     * @param records { @link List<<%= domainName %>Dto> }
+     * @param records {@link List<<%= domainName %>Dto> }
      *
      * @return int
      */
@@ -86,9 +86,9 @@ public class <%= domainName %>Service {
      * 根据主键-ID查询
      *
      *
-     * @param id { @link Integer }
+     * @param id {@link Integer }
      *
-     * @return { @link <%= domainName %>Dto }
+     * @return {@link <%= domainName %>Dto }
      */
     public <%= domainName %>Dto selectByPrimaryKey(Integer id) {
 
@@ -102,9 +102,9 @@ public class <%= domainName %>Service {
      * 根据字段选择性查询
      *
      *
-     * @param record { @link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>Dto }
      *
-     * @return { @link List<<%= domainName %>Dto> }
+     * @return {@link List<<%= domainName %>Dto> }
      */
     public List<<%= domainName %>Dto> selectSelective(<%= domainName %>Dto record) {
         <%= domainName %> <%= lowerDomainName %> = <%= lowerDomainName %>MapStruct.toEntity(record);
@@ -117,7 +117,7 @@ public class <%= domainName %>Service {
      * 根据主键更新
      *
      *
-     * @param record { @link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>Dto }
      *
      * @return int
      */
@@ -139,7 +139,7 @@ public class <%= domainName %>Service {
      * 根据主键选择性更新
      *
      *
-     * @param record { @link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>Dto }
      *
      * @return int
      */
@@ -160,7 +160,7 @@ public class <%= domainName %>Service {
      * 根据主键删除记录
      *
      *
-     * @param id { @link Integer }
+     * @param id {@link Integer }
      *
      * @return int
      */
@@ -175,7 +175,7 @@ public class <%= domainName %>Service {
      * 根据主键逻辑删除记录
      *
      *
-     * @param id { @link Integer }
+     * @param id {@link Integer }
      *
      * @return int
      */
@@ -187,7 +187,7 @@ public class <%= domainName %>Service {
      * 根据主键删除多条记录
      *
      *
-     * @param ids { @link List<String> }
+     * @param ids {@link List<String> }
      *
      * @return int
      */
@@ -199,7 +199,7 @@ public class <%= domainName %>Service {
      * 根据主键逻辑删除多条记录
      *
      *
-     * @param ids { @link List<String> }
+     * @param ids {@link List<String> }
      *
      * @return int
      */
@@ -211,9 +211,9 @@ public class <%= domainName %>Service {
      * 根据条件分页查询
      *
      *
-     * @param gridPageRequest { @link GridPageRequest }
+     * @param gridPageRequest {@link GridPageRequest }
      *
-     * @return { @link GridReturnData<<%= domainName %>Dto> }
+     * @return {@link GridReturnData<<%= domainName %>Dto> }
      */
     public GridReturnData<<%= domainName %>Dto> selectPage(GridPageRequest gridPageRequest){
         Integer user_id= SecurityUtils.getCurrentUserId();

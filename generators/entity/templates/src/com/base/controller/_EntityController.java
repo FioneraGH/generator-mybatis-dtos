@@ -32,9 +32,9 @@ public class <%= domainName %>Controller {
      * 根据主键ID删除
      *
      *
-     * @param id { @link Integer }
+     * @param id {@link Integer }
      *
-     * @return { @link Result }
+     * @return {@link Result }
      */
     @DeleteMapping(value = "/{id}")
     public Result deleteByPrimaryKey(@PathVariable Integer id) {
@@ -47,9 +47,9 @@ public class <%= domainName %>Controller {
      * 根据主键ID删除多条记录
      *
      *
-     * @param ids { @link List<String> }
+     * @param ids {@link List<String> }
      *
-     * @return { @link Result }
+     * @return {@link Result }
      */
     @DeleteMapping
     public Result deleteMoreByIds(@RequestBody List<String> ids) {
@@ -62,9 +62,9 @@ public class <%= domainName %>Controller {
      * 新增记录
      *
      *
-     * @param <%= lowerDomainName %>Dto { @link <%= domainName %>Dto }
+     * @param <%= lowerDomainName %>Dto {@link <%= domainName %>Dto }
      *
-     * @return { @link Result }
+     * @return {@link Result }
      */
     @PostMapping
     public Result insert(@RequestBody <%= domainName %>Dto <%= lowerDomainName %>Dto) {
@@ -77,9 +77,9 @@ public class <%= domainName %>Controller {
      * 根据主键查询记录
      *
      *
-     * @param id { @link Integer }
+     * @param id {@link Integer }
      *
-     * @return { @link Result }
+     * @return {@link Result }
      */
     @GetMapping(value = "/{id}")
     public Result selectByPrimaryKey(@PathVariable Integer id) {
@@ -92,9 +92,9 @@ public class <%= domainName %>Controller {
      * 分页查询记录
      *
      *
-     * @param gridPageRequest { @link GridPageRequest }
+     * @param gridPageRequest {@link GridPageRequest }
      *
-     * @return { @link Result }
+     * @return {@link Result }
      */
     @PostMapping(value = "/page")
     public Result selectPage(@RequestBody GridPageRequest gridPageRequest) {
@@ -107,9 +107,9 @@ public class <%= domainName %>Controller {
      * 更新记录
      *
      *
-     * @param <%= lowerDomainName %>Dto { @link <%= domainName %>Dto }
+     * @param <%= lowerDomainName %>Dto {@link <%= domainName %>Dto }
      *
-     * @return { @link Result }
+     * @return {@link Result }
      */
     @PutMapping
     public Result updateByPrimaryKey(@RequestBody <%= domainName %>Dto <%= lowerDomainName %>Dto) {
