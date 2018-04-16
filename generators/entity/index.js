@@ -108,7 +108,7 @@ module.exports = class extends Generator {
     setTimeout(function() {
       if (
         shell.exec(
-          'java -Djava.ext.dirs=./lib -jar ./lib/mybatis-generator-core-1.3.6-SNAPSHOT.jar -configfile generatorConfig.xml -overwrite'
+          'java -Djava.ext.dirs=./lib -jar ./lib/mybatis-generator-core-1.3.6.jar -configfile generatorConfig.xml -overwrite'
         ).code !== 0
       ) {
         shell.echo('Error: mybatis generate failed');
