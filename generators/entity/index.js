@@ -140,8 +140,7 @@ module.exports = class extends Generator {
         var dtoFileStr = domainFileStr.replace(
           'class ' + self.domainName,
           'class ' + self.domainName + 'Dto'
-        );
-        dtoFileStr = dtoFileStr.replace(
+        ).replace(
           self.packageName + '.domain.' + self.subPackageName,
           self.packageName + '.domain.' + self.subPackageName + '.dto'
         );
