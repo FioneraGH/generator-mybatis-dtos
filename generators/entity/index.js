@@ -1,16 +1,15 @@
-"use strict";
-const Generator = require("yeoman-generator");
+'use strict';
+const Generator = require('yeoman-generator');
 // import { Generator } from 'yeoman-generator';
-const shell = require("shelljs");
-const prompts = require("./prompts");
-const fileSys = require("fs");
+const shell = require('shelljs');
+const prompts = require('./prompts');
+const fileSys = require('fs');
 
 module.exports = class extends Generator {
-
   constructor(args, opts) {
     super(args, opts);
 
-    console.log("preparing generator");
+    console.log('preparing generator');
 
     this.DBHost = this.options.DBHost;
     this.DBPort = this.options.DBPort;
@@ -28,7 +27,7 @@ module.exports = class extends Generator {
 
   get prompting() {
     // Have Yeoman greet the user.
-    console.log("prompting configuaration");
+    console.log('prompting configuaration');
     return {
       askForDBHost: prompts.askForDBHost,
       askForDBPort: prompts.askForDBPort,
@@ -47,21 +46,21 @@ module.exports = class extends Generator {
     const self = this;
 
     // 由于没找到覆盖参数，临时判断删除
-    if (fileSys.existsSync(this.destinationPath("generatorConfig.xml"))) {
+    if (fileSys.existsSync(this.destinationPath('generatorConfig.xml'))) {
       const done = this.async();
       const prompts = [
         {
-          type: "input",
-          name: "delConfig",
-          message: "Note: generatorConfig.xml already exists. Delete it? :",
-          default: "yes"
+          type: 'input',
+          name: 'delConfig',
+          message: 'Note: generatorConfig.xml already exists. Delete it? :',
+          default: 'yes'
         }
       ];
       this.prompt(prompts).then(props => {
         const v = props.delConfig.toLowerCase();
-        if (v === "yes" || v === "y") {
+        if (v === 'yes' || v === 'y') {
           done();
-          fileSys.unlinkSync(this.destinationPath("generatorConfig.xml"));
+          fileSys.unlinkSync(this.destinationPath('generatorConfig.xml'));
           self._processing(self);
         }
       });
@@ -85,15 +84,14 @@ module.exports = class extends Generator {
 
   _processing(self) {
     // shell.echo("=================================================");
-    if (shell.which("java")) {
+    if (shell.which('java')) {
       // shell.echo("Find java command");
       // shell.echo("=================================================");
     } else {
-      shell.echo("Sorry, this script requires java framework");
+      shell.echo('Sorry, this script requires java framework');
       // shell.echo("=================================================");
       shell.exit(1);
     }
-
 
     let templateOptions = {};
     templateOptions.DBHost = self.DBHost;
@@ -113,93 +111,97 @@ module.exports = class extends Generator {
       self.domainName.substring(1);
     templateOptions.allLowerDomainName = self.domainName.toLowerCase();
 
-
     self.fs.copyTpl(
-      self.templatePath("generatorConfig.xml"),
-      self.destinationPath("generatorConfig.xml"),
+      self.templatePath('generatorConfig.xml'),
+      self.destinationPath('generatorConfig.xml'),
       templateOptions
     );
 
     let cpargs = [
-      self.templatePath() + "/copyfiles.sh",
-      self.templatePath("lib"),
-      self.destinationPath("lib")
+      self.templatePath() + '/copyfiles.sh',
+      self.templatePath('lib'),
+      self.destinationPath('lib')
     ];
 
-    self.spawnCommandSync("bash", cpargs);
+    self.spawnCommandSync('bash', cpargs);
 
-    if (!fileSys.existsSync(self.destinationPath("src/main/java"))) {
-      self.spawnCommandSync("mkdir", [
-        "-p",
-        self.destinationPath("src/main/java")
+    if (!fileSys.existsSync(self.destinationPath('src/main/java'))) {
+      self.spawnCommandSync('mkdir', [
+        '-p',
+        self.destinationPath('src/main/java')
       ]);
     }
 
-    if (!fileSys.existsSync(self.destinationPath("src/main/resources/mapper"))) {
-      self.spawnCommandSync("mkdir", [
-        "-p",
-        self.destinationPath("src/main/resources/mapper")
+    if (
+      !fileSys.existsSync(self.destinationPath('src/main/resources/mapper'))
+    ) {
+      self.spawnCommandSync('mkdir', [
+        '-p',
+        self.destinationPath('src/main/resources/mapper')
       ]);
     }
-
 
     setTimeout(function() {
       if (
         shell.exec(
-          "java -Djava.ext.dirs=./lib -jar ./lib/mybatis-generator-core-1.3.6.jar -configfile generatorConfig.xml -overwrite"
+          'java -Djava.ext.dirs=./lib -jar ./lib/mybatis-generator-core-1.3.6.jar -configfile generatorConfig.xml -overwrite'
         ).code !== 0
       ) {
-        shell.echo("Error: mybatis generate failed");
+        shell.echo('Error: mybatis generate failed');
         shell.exit(1);
       } else {
         const localPackageName = self.packageName;
-        const packageNameTemp = localPackageName.replace(".", "/");
+        const packageNameTemp = localPackageName.replace('.', '/');
         const domainDir = self.destinationPath(
-          "src/main/java/" +
-          packageNameTemp +
-          "/domain/" +
-          self.subPackageName +
-          "/"
+          'src/main/java/' +
+            packageNameTemp +
+            '/domain/' +
+            self.subPackageName +
+            '/'
         );
         const dtoDir = self.destinationPath(
-          "src/main/java/" +
-          packageNameTemp +
-          "/domain/" +
-          self.subPackageName +
-          "/dto/"
+          'src/main/java/' +
+            packageNameTemp +
+            '/domain/' +
+            self.subPackageName +
+            '/dto/'
         );
 
         if (!fileSys.existsSync(dtoDir)) {
-          self.spawnCommandSync("mkdir", ["-p", dtoDir]);
+          self.spawnCommandSync('mkdir', ['-p', dtoDir]);
         }
 
         // 创建dto文件
-        const domainFileStr = self.fs.read(domainDir + self.domainName + ".java");
-        const dtoFileStr = domainFileStr.replace(
-          "class " + self.domainName,
-          "class " + self.domainName + "Dto"
-        ).replace(
-          self.packageName + ".domain." + self.subPackageName,
-          self.packageName + ".domain." + self.subPackageName + ".dto"
+        const domainFileStr = self.fs.read(
+          domainDir + self.domainName + '.java'
         );
-        self.fs.write(dtoDir + self.domainName + "Dto.java", dtoFileStr);
+        const dtoFileStr = domainFileStr
+          .replace(
+            'class ' + self.domainName,
+            'class ' + self.domainName + 'Dto'
+          )
+          .replace(
+            self.packageName + '.domain.' + self.subPackageName,
+            self.packageName + '.domain.' + self.subPackageName + '.dto'
+          );
+        self.fs.write(dtoDir + self.domainName + 'Dto.java', dtoFileStr);
 
         // 创建mapstruct文件
         const mapStructSourceFile = self.templatePath(
-          "src/com/base/controller/mapstruct/_EntityMapStruct.java"
+          'src/com/base/controller/mapstruct/_EntityMapStruct.java'
         );
         const mapStructTargetDir = self.destinationPath(
-          "src/main/java/" +
-          packageNameTemp +
-          "/controller/mapstruct/" +
-          self.subPackageName +
-          "/"
+          'src/main/java/' +
+            packageNameTemp +
+            '/controller/mapstruct/' +
+            self.subPackageName +
+            '/'
         );
         const mapStructTargetFile =
-          mapStructTargetDir + self.domainName + "MapStruct.java";
+          mapStructTargetDir + self.domainName + 'MapStruct.java';
 
         if (!fileSys.existsSync(mapStructTargetDir)) {
-          self.spawnCommandSync("mkdir", ["-p", mapStructTargetDir]);
+          self.spawnCommandSync('mkdir', ['-p', mapStructTargetDir]);
         }
 
         self.fs.copyTpl(
@@ -210,45 +212,45 @@ module.exports = class extends Generator {
 
         // 创建Service和controller的路径，拷贝Service和controller
         const serviceSourceFilePath = self.templatePath(
-          "src/com/base/service/_EntityService.java"
+          'src/com/base/service/_EntityService.java'
         );
         const serviceTargetDir = self.destinationPath(
-          "src/main/java/" +
-          packageNameTemp +
-          "/service/" +
-          self.subPackageName +
-          "/"
+          'src/main/java/' +
+            packageNameTemp +
+            '/service/' +
+            self.subPackageName +
+            '/'
         );
         if (!fileSys.existsSync(serviceTargetDir)) {
-          self.spawnCommandSync("mkdir", ["-p", serviceTargetDir]);
+          self.spawnCommandSync('mkdir', ['-p', serviceTargetDir]);
         }
         self.fs.copyTpl(
           serviceSourceFilePath,
-          serviceTargetDir + self.domainName + "Service.java",
+          serviceTargetDir + self.domainName + 'Service.java',
           templateOptions
         );
 
         const controllerSourceFilePath = self.templatePath(
-          "src/com/base/controller/_EntityController.java"
+          'src/com/base/controller/_EntityController.java'
         );
         const controllerTargetDir = self.destinationPath(
-          "src/main/java/" +
-          packageNameTemp +
-          "/controller/" +
-          self.subPackageName +
-          "/"
+          'src/main/java/' +
+            packageNameTemp +
+            '/controller/' +
+            self.subPackageName +
+            '/'
         );
         if (!fileSys.existsSync(controllerTargetDir)) {
-          self.spawnCommandSync("mkdir", ["-p", controllerTargetDir]);
+          self.spawnCommandSync('mkdir', ['-p', controllerTargetDir]);
         }
         self.fs.copyTpl(
           controllerSourceFilePath,
-          controllerTargetDir + self.domainName + "Controller.java",
+          controllerTargetDir + self.domainName + 'Controller.java',
           templateOptions
         );
       }
 
-      self._deleteFolder(self.destinationPath("lib/"))
+      self._deleteFolder(self.destinationPath('lib/'));
     }, 2000);
   }
 
@@ -257,8 +259,9 @@ module.exports = class extends Generator {
     if (fileSys.existsSync(path)) {
       files = fileSys.readdirSync(path);
       files.forEach(function(file, index) {
-        const curPath = path + "/" + file;
-        if (fileSys.statSync(curPath).isDirectory()) { // recurse
+        const curPath = path + '/' + file;
+        if (fileSys.statSync(curPath).isDirectory()) {
+          // recurse
           deleteFolder(curPath);
         } else {
           fileSys.unlinkSync(curPath);

@@ -8,4 +8,4 @@ module.exports = {
   entityTableName: '',
   packageName: 'com.wisdom',
   subPackageName: ''
-}
+};
