@@ -28,18 +28,7 @@ module.exports = class extends Generator {
   get prompting() {
     // Have Yeoman greet the user.
     console.log('prompting configuaration');
-    return {
-      askForDBHost: prompts.askForDBHost,
-      askForDBPort: prompts.askForDBPort,
-      askForDBName: prompts.askForDBName,
-      askForDBUserName: prompts.askForDBUserName,
-      askForDBPassword: prompts.askForDBPassword,
-      askForTableName: prompts.askForTableName,
-
-      askForDomainName: prompts.askForDomainName,
-      askForPackageName: prompts.askForPackageName,
-      askForSubPackageName: prompts.askForSubPackageName
-    };
+    return prompts;
   }
 
   writing() {
