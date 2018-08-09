@@ -239,11 +239,11 @@ module.exports = class extends Generator {
         );
       }
 
-      self._deleteFolder(self.destinationPath('lib/'));
+      // self._deleteFolder(self, self.destinationPath('lib/'));
     }, 2000);
   }
 
-  _deleteFolder(path) {
+  _deleteFolder(self, path) {
     let files = [];
     if (fileSys.existsSync(path)) {
       files = fileSys.readdirSync(path);
@@ -251,7 +251,7 @@ module.exports = class extends Generator {
         const curPath = path + '/' + file;
         if (fileSys.statSync(curPath).isDirectory()) {
           // recurse
-          deleteFolder(curPath);
+          self._deleteFolder(curPath);
         } else {
           fileSys.unlinkSync(curPath);
         }

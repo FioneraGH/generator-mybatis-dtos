@@ -20,7 +20,7 @@
         <plugin type="com.centling.plugins.DeleteMorePlugin"></plugin>
         <plugin type="com.centling.plugins.DeleteMoreLogicPlugin"></plugin> -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-          <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+          <property name="mappers" value="com.wisdom.utils.mapper.MyMapperAndIds,com.wisdom.utils.mapper.DeleteLogicMapper"/>
         </plugin>
 
         <plugin type="com.centling.plugins.SelectPagePlugin"></plugin>
