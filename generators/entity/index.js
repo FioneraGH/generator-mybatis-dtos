@@ -2,6 +2,7 @@
 const Generator = require('yeoman-generator');
 // import { Generator } from 'yeoman-generator';
 const shell = require('shelljs');
+const rimraf = require('rimraf');
 const prompts = require('./prompts');
 const fileSys = require('fs');
 
@@ -239,7 +240,10 @@ module.exports = class extends Generator {
         );
       }
 
-      // self._deleteFolder(self, self.destinationPath('lib/'));
+      // self._deleteFolder(self.destinationPath('lib/'));
+      rimraf('lib', function(err) {
+        console.log(err);
+      });
     }, 2000);
   }
 
