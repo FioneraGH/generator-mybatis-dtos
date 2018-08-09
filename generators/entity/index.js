@@ -160,22 +160,22 @@ module.exports = class extends Generator {
           self.spawnCommandSync('mkdir', ['-p', dtoDir]);
         }
 
-        // 创建dto文件
+        // 创建DTO文件
         const domainFileStr = self.fs.read(
           domainDir + self.domainName + '.java'
         );
         const dtoFileStr = domainFileStr
           .replace(
             'class ' + self.domainName,
-            'class ' + self.domainName + 'Dto'
+            'class ' + self.domainName + 'DTO'
           )
           .replace(
             self.packageName + '.domain.' + self.subPackageName,
             self.packageName + '.domain.' + self.subPackageName + '.dto'
           );
-        self.fs.write(dtoDir + self.domainName + 'Dto.java', dtoFileStr);
+        self.fs.write(dtoDir + self.domainName + 'DTO.java', dtoFileStr);
 
-        // 创建mapstruct文件
+        // 创建MapStruct文件
         const mapStructSourceFile = self.templatePath(
           'src/com/base/controller/mapstruct/_EntityMapStruct.java'
         );
@@ -199,7 +199,7 @@ module.exports = class extends Generator {
           templateOptions
         );
 
-        // 创建Service和controller的路径，拷贝Service和controller
+        // 创建Service和Controller的路径，拷贝Service和Controller
         const serviceSourceFilePath = self.templatePath(
           'src/com/base/service/_EntityService.java'
         );
