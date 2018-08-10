@@ -19,7 +19,7 @@
         <plugin type="com.centling.plugins.BatchUpdatePlugin"></plugin>
         <plugin type="com.centling.plugins.DeleteMorePlugin"></plugin>
         <plugin type="com.centling.plugins.DeleteMoreLogicPlugin"></plugin> -->
-        <plugin type="com.centling.plugins.SelectPagePlugin"></plugin>
+        <plugin type="com.wisdom.plugins.SelectPagePlugin"></plugin>
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
           <property name="mappers" value="com.wisdom.utils.mapper.MyMapperAndIds,com.wisdom.utils.mapper.DeleteLogicMapper"/>
