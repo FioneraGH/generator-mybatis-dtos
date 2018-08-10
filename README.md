@@ -39,4 +39,8 @@ Apache-2.0 © [FioneraGH](./LICENSE)
 
 ## Credits
 
+[Yeoman](http://yeoman.io)
 [Jack Gao](mailto:jack.gao.centling.com)
+[FioneraGH](https://github.com/FioneraGH)
+[VictorChow](https://github.com/VictorChow)
+[yiqihaha](https://github.com/yiqihaha)
