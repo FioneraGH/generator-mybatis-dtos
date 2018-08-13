@@ -22,7 +22,7 @@
         <plugin type="com.wisdom.plugins.SelectPagePlugin"></plugin>
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-          <property name="mappers" value="com.wisdom.utils.mapper.MyMapperAndIds,com.wisdom.utils.mapper.DeleteLogicMapper"/>
+          <property name="mappers" value="com.wisdom.utils.mapper.MyMapperAndIds,com.wisdom.utils.mapper.LogicDelete.DeleteLogicMapper"/>
         </plugin>
 
         <commentGenerator>
