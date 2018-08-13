@@ -100,6 +100,8 @@ module.exports = class extends Generator {
       self.domainName.substring(0, 1).toLowerCase() +
       self.domainName.substring(1);
     templateOptions.allLowerDomainName = self.domainName.toLowerCase();
+    // 新增一个下划线风格的变量,用于controller当中
+    templateOptions.underScoreCaseDomainName = templateOptions.lowerDomainName.replace(/([A-Z])/g,"_$1").toLowerCase();
 
     self.fs.copyTpl(
       self.templatePath('generatorConfig.xml'),
