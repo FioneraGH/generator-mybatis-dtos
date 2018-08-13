@@ -21,7 +21,7 @@ import <%= packageName %>.utils.Result;
  * @author         Enter your name here...
  */
 @RestController
-@RequestMapping("/api/<%= allLowerDomainName %>")
+@RequestMapping("/api/<%= underScoreCaseDomainName %>")
 public class <%= domainName %>Controller {
     @Autowired
     <%= domainName %>Service   <%= lowerDomainName %>Service;
