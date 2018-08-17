@@ -170,13 +170,13 @@ module.exports = class extends Generator {
         const dtoFileStr = domainFileStr
           .replace(
             'class ' + self.domainName,
-            'class ' + self.domainName + 'DTO'
+            'class ' + self.domainName + 'Dto'
           )
           .replace(
             self.packageName + '.domain.' + self.subPackageName,
             self.packageName + '.domain.' + self.subPackageName + '.dto'
           );
-        self.fs.write(dtoDir + self.domainName + 'DTO.java', dtoFileStr);
+        self.fs.write(dtoDir + self.domainName + 'Dto.java', dtoFileStr);
 
         // 创建MapStruct文件
         const mapStructSourceFile = self.templatePath(
