@@ -216,18 +216,19 @@ public class <%= domainName %>Service {
      * @return {@link GridReturnData<<%= domainName %>Dto> }
      */
     public GridReturnData<<%= domainName %>Dto> selectPage(GridPageRequest gridPageRequest){
-        Integer user_id= SecurityUtils.getCurrentUserId();
+        Integer userId = SecurityUtils.getCurrentUserId();
 
         GridReturnData<<%= domainName %>Dto> mGridReturnData = new GridReturnData<>();
         List<GridFilterInfo> filterList = gridPageRequest.getFilterList();
-        Map map = new HashMap();
-        filterList.stream().forEach(gridFilterInfo ->{//封装筛选条件
+        Map<String, Object> map = new HashMap<>();
+        // 封装筛选条件
+        filterList.forEach(gridFilterInfo ->{
             if(gridFilterInfo.getFilterKey() != null && gridFilterInfo.getFilterValue() != null){
                 map.put(gridFilterInfo.getFilterKey(), gridFilterInfo.getFilterValue());
             }
         });
         map.put("searchKey", gridPageRequest.getSearchKey());
-        //对map中的参数的合法性进行校验
+        // 对map中的参数的合法性进行校验
 
         String sortMyBatisByString = gridPageRequest.getSortMybatisString();
         PageHelper.startPage(gridPageRequest.getPageNum(), gridPageRequest.getPageSize(), sortMyBatisByString);
