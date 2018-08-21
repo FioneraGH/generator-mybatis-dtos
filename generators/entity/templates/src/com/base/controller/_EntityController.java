@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import <%= packageName %>.controller.mapstruct.<%= subPackageName %>.<%= domainName %>MapStruct;
-import <%= packageName %>.domain.<%= subPackageName %>.<%= domainName %>;
-import <%= packageName %>.domain.<%= subPackageName %>.dto.<%= domainName %>Dto;
+import <%= packageName %>.domain.<%= subPackageName %>.dto.<%= domainName %>DTO;
 import <%= packageName %>.service.<%= subPackageName %>.<%= domainName %>Service;
 import <%= packageName %>.utils.GridPageRequest;
 import <%= packageName %>.utils.GridReturnData;
@@ -62,13 +61,13 @@ public class <%= domainName %>Controller {
      * 新增记录
      *
      *
-     * @param <%= lowerDomainName %>Dto {@link <%= domainName %>Dto }
+     * @param <%= lowerDomainName %>DTO {@link <%= domainName %>DTO }
      *
      * @return {@link Result }
      */
     @PostMapping
-    public Result insert(@RequestBody <%= domainName %>Dto <%= lowerDomainName %>Dto) {
-        <%= lowerDomainName %>Service.insert(<%= lowerDomainName %>Dto);
+    public Result insert(@RequestBody <%= domainName %>DTO <%= lowerDomainName %>DTO) {
+        <%= lowerDomainName %>Service.insert(<%= lowerDomainName %>DTO);
 
         return new Result();
     }
@@ -83,9 +82,9 @@ public class <%= domainName %>Controller {
      */
     @GetMapping(value = "/{id}")
     public Result selectByPrimaryKey(@PathVariable Integer id) {
-        <%= domainName %>Dto <%= lowerDomainName %>Dto = <%= lowerDomainName %>Service.selectByPrimaryKey(id);
+        <%= domainName %>DTO <%= lowerDomainName %>DTO = <%= lowerDomainName %>Service.selectByPrimaryKey(id);
 
-        return new Result(<%= lowerDomainName %>Dto);
+        return new Result(<%= lowerDomainName %>DTO);
     }
 
     /**
@@ -98,7 +97,7 @@ public class <%= domainName %>Controller {
      */
     @PostMapping(value = "/page")
     public Result selectPage(@RequestBody GridPageRequest gridPageRequest) {
-        GridReturnData<<%= domainName %>Dto> records = <%= lowerDomainName %>Service.selectPage(gridPageRequest);
+        GridReturnData<<%= domainName %>DTO> records = <%= lowerDomainName %>Service.selectPage(gridPageRequest);
 
         return new Result(records);
     }
@@ -107,13 +106,13 @@ public class <%= domainName %>Controller {
      * 更新记录
      *
      *
-     * @param <%= lowerDomainName %>Dto {@link <%= domainName %>Dto }
+     * @param <%= lowerDomainName %>DTO {@link <%= domainName %>DTO }
      *
      * @return {@link Result }
      */
     @PutMapping
-    public Result updateByPrimaryKey(@RequestBody <%= domainName %>Dto <%= lowerDomainName %>Dto) {
-        <%= lowerDomainName %>Service.updateByPrimaryKey(<%= lowerDomainName %>Dto);
+    public Result updateByPrimaryKey(@RequestBody <%= domainName %>DTO <%= lowerDomainName %>DTO) {
+        <%= lowerDomainName %>Service.updateByPrimaryKey(<%= lowerDomainName %>DTO);
 
         return new Result();
     }

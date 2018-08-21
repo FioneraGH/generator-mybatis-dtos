@@ -2,7 +2,7 @@ package <%= packageName %>.service.<%= subPackageName %>;
 
 import <%= packageName %>.controller.mapstruct.<%= subPackageName %>.<%= domainName %>MapStruct;
 import <%= packageName %>.domain.<%= subPackageName %>.<%= domainName %>;
-import <%= packageName %>.domain.<%= subPackageName %>.dto.<%= domainName %>Dto;
+import <%= packageName %>.domain.<%= subPackageName %>.dto.<%= domainName %>DTO;
 import <%= packageName %>.mapper.<%= subPackageName %>.<%= domainName %>Mapper;
 import <%= packageName %>.security.SecurityUtils;
 import <%= packageName %>.utils.*;
@@ -36,11 +36,11 @@ public class <%= domainName %>Service {
      * 写入记录
      *
      *
-     * @param record {@link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>DTO }
      *
      * @return int
      */
-    public int insert(<%= domainName %>Dto record) {
+    public int insert(<%= domainName %>DTO record) {
         <%= domainName %> <%= lowerDomainName %> = <%= lowerDomainName %>MapStruct.toEntity(record);
 
         Integer userId = SecurityUtils.getCurrentUserId();
@@ -60,11 +60,11 @@ public class <%= domainName %>Service {
      * 批量写入记录
      *
      *
-     * @param records {@link List<<%= domainName %>Dto> }
+     * @param records {@link List<<%= domainName %>DTO> }
      *
      * @return int
      */
-    public int insertBatch(List<<%= domainName %>Dto> records) {
+    public int insertBatch(List<<%= domainName %>DTO> records) {
         List<<%= domainName %>> recordList = <%= lowerDomainName %>MapStruct.toEntity(records);
 
         Integer userId = SecurityUtils.getCurrentUserId();
@@ -88,9 +88,9 @@ public class <%= domainName %>Service {
      *
      * @param id {@link Integer }
      *
-     * @return {@link <%= domainName %>Dto }
+     * @return {@link <%= domainName %>DTO }
      */
-    public <%= domainName %>Dto selectByPrimaryKey(Integer id) {
+    public <%= domainName %>DTO selectByPrimaryKey(Integer id) {
 
         <%= domainName %> <%= lowerDomainName %> = <%= lowerDomainName %>Mapper.selectByPrimaryKey(id);
         Preconditions.checkNotNull(<%= lowerDomainName %>, ApplicationErrorEnum.COMMON_DATA_NOT_FOUND);
@@ -102,11 +102,11 @@ public class <%= domainName %>Service {
      * 根据字段选择性查询
      *
      *
-     * @param record {@link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>DTO }
      *
-     * @return {@link List<<%= domainName %>Dto> }
+     * @return {@link List<<%= domainName %>DTO> }
      */
-    public List<<%= domainName %>Dto> selectSelective(<%= domainName %>Dto record) {
+    public List<<%= domainName %>DTO> selectSelective(<%= domainName %>DTO record) {
         <%= domainName %> <%= lowerDomainName %> = <%= lowerDomainName %>MapStruct.toEntity(record);
 
         List<<%= domainName %>> <%= lowerDomainName %>List = <%= lowerDomainName %>Mapper.select(<%= lowerDomainName %>);
@@ -117,11 +117,11 @@ public class <%= domainName %>Service {
      * 根据主键更新
      *
      *
-     * @param record {@link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>DTO }
      *
      * @return int
      */
-    public int updateByPrimaryKey(<%= domainName %>Dto record) {
+    public int updateByPrimaryKey(<%= domainName %>DTO record) {
         <%= domainName %> <%= lowerDomainName %> = <%= lowerDomainName %>MapStruct.toEntity(record);
 
         Integer userId = SecurityUtils.getCurrentUserId();
@@ -139,11 +139,11 @@ public class <%= domainName %>Service {
      * 根据主键选择性更新
      *
      *
-     * @param record {@link <%= domainName %>Dto }
+     * @param record {@link <%= domainName %>DTO }
      *
      * @return int
      */
-    public int updateByPrimaryKeySelective(<%= domainName %>Dto record) {
+    public int updateByPrimaryKeySelective(<%= domainName %>DTO record) {
         <%= domainName %> <%= lowerDomainName %> = <%= lowerDomainName %>MapStruct.toEntity(record);
 
         Integer userId = SecurityUtils.getCurrentUserId();
@@ -213,12 +213,12 @@ public class <%= domainName %>Service {
      *
      * @param gridPageRequest {@link GridPageRequest }
      *
-     * @return {@link GridReturnData<<%= domainName %>Dto> }
+     * @return {@link GridReturnData<<%= domainName %>DTO> }
      */
-    public GridReturnData<<%= domainName %>Dto> selectPage(GridPageRequest gridPageRequest){
+    public GridReturnData<<%= domainName %>DTO> selectPage(GridPageRequest gridPageRequest){
         Integer user_id= SecurityUtils.getCurrentUserId();
 
-        GridReturnData<<%= domainName %>Dto> mGridReturnData = new GridReturnData<>();
+        GridReturnData<<%= domainName %>DTO> mGridReturnData = new GridReturnData<>();
         List<GridFilterInfo> filterList = gridPageRequest.getFilterList();
         Map map = new HashMap();
         filterList.stream().forEach(gridFilterInfo ->{//封装筛选条件
@@ -235,7 +235,7 @@ public class <%= domainName %>Service {
         List<<%= domainName %>> list = <%= lowerDomainName %>Mapper.selectPage(map);
 
         PageInfo<<%= domainName %>> pageInfo = new PageInfo<>(list);
-        PageInfo<<%= domainName %>Dto> pageInfoFinal = new PageInfo<>(<%= lowerDomainName %>MapStruct.toDto(list));
+        PageInfo<<%= domainName %>DTO> pageInfoFinal = new PageInfo<>(<%= lowerDomainName %>MapStruct.toDto(list));
         pageInfoFinal.setTotal(pageInfo.getTotal());
         mGridReturnData.setPageInfo(pageInfoFinal);
 
