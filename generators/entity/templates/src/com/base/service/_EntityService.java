@@ -26,11 +26,15 @@ import java.util.Map;
 public class <%= domainName %>Service {
     private final Logger logger = LoggerFactory.getLogger(<%= domainName %>Service.class);
 
-    @Autowired
-    <%= domainName %>Mapper <%= lowerDomainName %>Mapper;
+    private final <%= domainName %>Mapper <%= lowerDomainName %>Mapper;
+
+    private final <%= domainName %>MapStruct <%= lowerDomainName %>MapStruct;
 
     @Autowired
-    <%= domainName %>MapStruct <%= lowerDomainName %>MapStruct;
+    public <%= domainName %>Service(<%= domainName %>MapStruct <%= lowerDomainName %>MapStruct, <%= domainName %>Mapper <%= lowerDomainName %>Mapper) {
+        this.<%= lowerDomainName %>MapStruct = <%= lowerDomainName %>MapStruct;
+        this.<%= lowerDomainName %>Mapper = <%= lowerDomainName %>Mapper;
+    }
 
     /**
      * 写入记录
@@ -216,13 +220,10 @@ public class <%= domainName %>Service {
      * @return {@link GridReturnData<<%= domainName %>DTO> }
      */
     public GridReturnData<<%= domainName %>DTO> selectPage(GridPageRequest gridPageRequest){
-        Integer userId = SecurityUtils.getCurrentUserId();
-
         GridReturnData<<%= domainName %>DTO> mGridReturnData = new GridReturnData<>();
         List<GridFilterInfo> filterList = gridPageRequest.getFilterList();
-        Map<String, Object> map = new HashMap<>();
-        // 封装筛选条件
-        filterList.forEach(gridFilterInfo ->{
+        Map<String, Object> map = new HashMap<>(2);
+        filterList.forEach(gridFilterInfo -> {
             if(gridFilterInfo.getFilterKey() != null && gridFilterInfo.getFilterValue() != null){
                 map.put(gridFilterInfo.getFilterKey(), gridFilterInfo.getFilterValue());
             }
