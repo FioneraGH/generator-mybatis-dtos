@@ -28,7 +28,9 @@ module.exports = {
 
   askForDomainName: askForDomainName,
   askForPackageName: askForPackageName,
-  askForSubPackageName: askForSubPackageName
+  askForSubPackageName: askForSubPackageName,
+
+  askForUseLombok: askForUseLombok
 };
 
 function askForDBHost() {
@@ -125,7 +127,7 @@ function askForDBPassword() {
   const done = this.async();
   const prompts = [
     {
-      type: 'input',
+      type: 'password',
       name: 'DBPassword',
       message: 'Please input the db password:',
       default: DBPassword
@@ -227,4 +229,20 @@ function askForSubPackageName() {
     }
     done();
   });
+}
+
+function askForUseLombok() {
+  const done = this.async()
+  const prompts = [
+    {
+      type: 'confirm',
+      name: 'useLombok',
+      message: 'Please choose whether to use Lombok:',
+      default: true
+    }
+  ]
+  this.prompt(prompts).then(props => {
+    this.useLombok = props.useLombok
+    done()
+  })
 }

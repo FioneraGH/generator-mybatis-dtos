@@ -10,9 +10,9 @@ import <%= packageName %>.utils.exception.ApplicationErrorEnum;
 import <%= packageName %>.utils.exception.Preconditions;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.slf4j.Logger;
+<% if(!useLombok){ %>import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;<% } %>
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,13 +21,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+<% if(useLombok){ %>import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;<% } %>
+
 @Service
 @Transactional(rollbackFor = Exception.class)
+<% if(useLombok){ %>@RequiredArgsConstructor
+@Slf4j<% }%>
 public class <%= domainName %>Service {
+<% if(useLombok){ %>    private final <%= domainName %>Mapper <%= lowerDomainName %>Mapper;
+    private final <%= domainName %>MapStruct <%= lowerDomainName %>MapStruct;
+<% } else {%>
     private final Logger logger = LoggerFactory.getLogger(<%= domainName %>Service.class);
-
     private final <%= domainName %>Mapper <%= lowerDomainName %>Mapper;
-
     private final <%= domainName %>MapStruct <%= lowerDomainName %>MapStruct;
 
     @Autowired
@@ -35,6 +41,7 @@ public class <%= domainName %>Service {
         this.<%= lowerDomainName %>MapStruct = <%= lowerDomainName %>MapStruct;
         this.<%= lowerDomainName %>Mapper = <%= lowerDomainName %>Mapper;
     }
+<% } %>
 
     /**
      * 写入记录
@@ -133,7 +140,7 @@ public class <%= domainName %>Service {
         <%= lowerDomainName %>.setLastModifiedTime(new Date());
 
         int num = <%= lowerDomainName %>Mapper.updateByPrimaryKey(<%= lowerDomainName %>);
-        Preconditions.checkArgument(num ==1, ApplicationErrorEnum.COMMON_FAIL);
+        Preconditions.checkArgument(num == 1, ApplicationErrorEnum.COMMON_FAIL);
 
         return num;
 
@@ -155,7 +162,7 @@ public class <%= domainName %>Service {
         <%= lowerDomainName %>.setLastModifiedTime(new Date());
 
         int num = <%= lowerDomainName %>Mapper.updateByPrimaryKeySelective(<%= lowerDomainName %>);
-        Preconditions.checkArgument(num ==1, ApplicationErrorEnum.COMMON_FAIL);
+        Preconditions.checkArgument(num == 1, ApplicationErrorEnum.COMMON_FAIL);
 
         return num;
     }
