@@ -2,15 +2,16 @@ package <%= packageName %>.controller.<%= subPackageName %>;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+<% if(!useLombok){ %>import org.springframework.beans.factory.annotation.Autowired;<% } %>
 import org.springframework.web.bind.annotation.*;
 
-import <%= packageName %>.controller.mapstruct.<%= subPackageName %>.<%= domainName %>MapStruct;
 import <%= packageName %>.domain.<%= subPackageName %>.dto.<%= domainName %>DTO;
 import <%= packageName %>.service.<%= subPackageName %>.<%= domainName %>Service;
 import <%= packageName %>.utils.GridPageRequest;
 import <%= packageName %>.utils.GridReturnData;
 import <%= packageName %>.utils.Result;
+
+<% if(useLombok){ %>import lombok.RequiredArgsConstructor;<% } %>
 
 /**
  * 对<%= domainName %>的操作
@@ -21,11 +22,13 @@ import <%= packageName %>.utils.Result;
  */
 @RestController
 @RequestMapping("/api/<%= underScoreCaseDomainName %>")
+<% if(useLombok){ %>@RequiredArgsConstructor<% } %>
 public class <%= domainName %>Controller {
+<% if(useLombok){ %>    private final <%= domainName %>Service <%= lowerDomainName %>Service;
+<% } else {%>
     @Autowired
-    <%= domainName %>Service   <%= lowerDomainName %>Service;
-    @Autowired
-    <%= domainName %>MapStruct <%= lowerDomainName %>MapStruct;
+    private <%= domainName %>Service <%= lowerDomainName %>Service;
+<% } %>
 
     /**
      * 根据主键ID删除

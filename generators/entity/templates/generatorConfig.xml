@@ -19,12 +19,16 @@
         <plugin type="com.centling.plugins.BatchUpdatePlugin"></plugin>
         <plugin type="com.centling.plugins.DeleteMorePlugin"></plugin>
         <plugin type="com.centling.plugins.DeleteMoreLogicPlugin"></plugin> -->
-        <plugin type="com.wisdom.plugins.SelectPagePlugin"></plugin>
+        <plugin type="com.wisdom.plugins.SelectPagePlugin"/>
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
           <property name="mappers" value="com.wisdom.utils.mapper.MyMapperAndIds,com.wisdom.utils.mapper.LogicDelete.DeleteLogicMapper"/>
         </plugin>
-
+        <% if(useLombok){ %>
+        <plugin type="com.wisdom.plugins.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
+        <% } %>
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/>

@@ -22,6 +22,7 @@ module.exports = class extends Generator {
     this.domainName = this.options.domainName;
     this.packageName = this.options.packageName;
     this.subPackageName = this.options.subPackageName;
+    this.useLombok = this.options.useLombok;
 
     this.rootDir = this.destinationRoot();
   }
@@ -40,15 +41,14 @@ module.exports = class extends Generator {
       const done = this.async();
       const prompts = [
         {
-          type: 'input',
+          type: 'confirm',
           name: 'delConfig',
           message: 'Note: generatorConfig.xml already exists. Delete it? :',
-          default: 'yes'
+          default: true
         }
       ];
       this.prompt(prompts).then(props => {
-        const v = props.delConfig.toLowerCase();
-        if (v === 'yes' || v === 'y') {
+        if (props.delConfig) {
           done();
           fileSys.unlinkSync(this.destinationPath('generatorConfig.xml'));
           self._processing(self);
@@ -94,6 +94,7 @@ module.exports = class extends Generator {
     templateOptions.domainName = self.domainName;
     templateOptions.packageName = self.packageName;
     templateOptions.subPackageName = self.subPackageName;
+    templateOptions.useLombok = self.useLombok;
 
     // 新增一个变量-domain的驼峰样式和小写样式
     templateOptions.lowerDomainName =
